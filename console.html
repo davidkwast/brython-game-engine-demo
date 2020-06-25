@@ -1,0 +1,57 @@
+<!doctype html>
+<html>
+<head>
+    <title>Brython interactive mode</title>
+    <meta charset="UTF-8">
+    <meta name=robots content="index, follow">
+    <meta name=description content=Brython >
+    <meta name=author content="Pierre Quentel">
+    <meta name=keywords content="Python, Brython">
+    <meta name=viewport content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="icon" type="image/png" href="favicon.png" />
+    <noscript>Please enable Javascript to view this page correctly.</noscript>
+
+    <!-- <link rel=stylesheet href="brython-3.6.2/doc/doc_brython.css"> -->
+
+    <script src="brython-3.6/brython.js"></script>
+    <script src="brython-3.6/brython_stdlib.js"></script>
+
+    <style>
+    .codearea {
+        background-color:#000;
+        color:#fff;
+        font-family:'Oxygen Mono', Consolas, 'Liberation Mono', 'DejaVu Sans Mono', monospace;
+        font-size:14px;
+        overflow:auto
+    }
+    div, textarea {
+        height: 100%;
+        width: 100%
+    }
+    #code{
+        height: 450px;
+    }
+    </style>
+</head>
+
+
+<body onload="brython(1)">
+    <table id="banner" cellpadding=0 cellspacing=0>
+        <tr id="banner_row" ></tr>
+    </table>
+
+    <textarea id=code class=codearea rows=20></textarea>
+
+    <div id=content></div>
+
+    <script type="text/python3" src="brython-3.6/console.py"></script>
+
+    <div id='div'></div>
+    
+    <canvas id="canvas" width="1000" height="240"
+        style="border-color:#000;border-style:solid;border-width:1px"></canvas>
+
+    
+</body>
+
+</html>

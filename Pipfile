@@ -1,0 +1,19 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+ipython = "*"
+jupyter = "*"
+brythonmagic = {git = "https://github.com/kikocorreoso/brythonmagic.git"}
+jupyter-contrib-nbextensions = "*"
+jupyter-nbextensions-configurator = "*"
+pygame = "*"
+pyglet = "*"
+tmxlib = "*"
+
+[dev-packages]
+
+[requires]
+python_version = "3.7"
