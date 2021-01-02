@@ -1,6 +1,3 @@
-from browser import document, html
-from browser.timer import request_animation_frame as raf
-from browser.timer import cancel_animation_frame as caf
 from time import time
 
 import graphics
@@ -144,25 +141,43 @@ class Game:
 
 ##
 
+from browser import document, html
+from browser.timer import request_animation_frame as raf
+from browser.timer import cancel_animation_frame as caf
+
 raf_id = None
+screen = None
+
+
+# EVENTS
+
+def _abort(event=None):
+    print('Aborting')
+    caf(raf_id)
+
+def _keyboard(event=None):
+    if event and event.keyCode == 27:
+        print('Keyboard: ESC pressed')
+        _abort()
+
+
+# LOOP
+
+def _loop(i): # necessary for request_animation_frame
+    global raf_id
+    raf_id = raf(_loop)
+    if screen.watchdog:
+        _abort()
+    screen.loop()
+
+
+# MAIN - RUN
 
 def run(canvas):
+    
+    global screen
     screen = Game(canvas)
-
-    def abort(event=None):
-        caf(raf_id)
-
-    def keyboard(event=None):
-        if event and event.keyCode == 27:
-            abort(event)
-
-    document["body"].bind("keydown", keyboard)
-
-    def loop(i):
-        global raf_id
-        raf_id = raf(loop)
-        if screen.watchdog:
-            abort()
-        screen.loop()
-
-    loop(0)
+    
+    document["body"].bind("keydown", _keyboard)
+    
+    _loop(0)
