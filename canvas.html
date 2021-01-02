@@ -15,12 +15,11 @@
 
 </head>
 
-<body id="body" onload="brython(1)">
+<body id="body" onload="brython({'debug':1})">
 
-    <canvas id="canvas" width="400" height="300"
-        style="border-color:#000;border-style:solid;border-width:1px;"></canvas>
+<canvas id="canvas" width="800" height="480" style="border-color:#000;border-style:solid;border-width:1px;"></canvas>
 
-    <script type="text/python" id="python_main">
+<script type="text/python" id="python_main">
 
 from browser import document, html
 canvas = document["canvas"]
@@ -31,5 +30,4 @@ main.run(canvas)
 </script>
 
 </body>
-
 </html>

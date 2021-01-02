@@ -13,22 +13,30 @@ class Unit:
 class VehicleUnit(Unit):
     def __init__(self, directional_sprite):
         self.directional_sprite = directional_sprite
-        self.map_position = (0, 0)
-        self.tilemap_position = (0, 0)
+        self.map_position = [0, 0]
+        self.tilemap_position = [0, 0]
         self.moving = False
         self.speed = 1
-        self.moving_to_tile = (0, 0)
+        self.moving_to_tile = [0, 0]
+        self.moving_total = [0, 0]
 
     def place_on_map(self, new_tilemap_position):
         self.tilemap_position = new_tilemap_position
         self.position = ((x * 128, y * 64) for x, y in new_tilemap_position)
 
     def execute_move(self, new_position):
+        # print(self.map_position, self.moving_total)
+        if self.moving_total[0] <= 0 or self.moving_total[1] <= 0:
+            return
+        self.moving_total[0] -= new_position[0] - self.map_position[0]
+        self.moving_total[1] -= new_position[1] - self.map_position[1]
         self.map_position = new_position
         self.tilemap_position = new_position[0] // 128, new_position[1] // 64
 
     def move_to(self, moving_to_tile):
         self.moving_to_tile = moving_to_tile
+        self.moving_total[0] = (moving_to_tile[0] - self.map_position[0]) * 128
+        self.moving_total[1] = (moving_to_tile[1] - self.map_position[1]) * 64
 
 
 class Map:
@@ -99,8 +107,8 @@ class Game:
 
         self.map = Map(3, 3)
         self.bus = VehicleUnit(graphics.SPRITES["bus"])
-        self.map.add_unit(self.bus, (0, 0))
-        self.bus.move_to((2, 2))
+        self.map.add_unit(self.bus, (0, 0)) # map 0,0 ?
+        self.bus.move_to((4, 3))
         # self.img_bus = html.IMG(src='resources/images/bus/256_0001.png')
 
     def clear(self):
@@ -108,31 +116,35 @@ class Game:
 
     def loop(self):
         self.watchdog = True
+        
         time_now = time()
         time_delta = time_now - self.last_time
         self.last_time = time_now
-        fps = 1 // time_delta
-
+        
         ctx = self.ctx
-
+        
         # clear screen
-        ctx.clearRect(0, 0, self.width, self.height)
-
+        self.clear()
+        
         # map, ground
         self.map.draw(
             ctx, time_now, time_delta, (0, 0), (self.width, self.height),
         )
-
+        
         # x = int(time_now * 50 % 150)
         # ctx.fillRect(25+x, 25+x, 50, 50)
         # ctx.drawImage(self.img_bus ,300-x, 10+x)
-
+        
+        fps = 1 // time_delta
+        ctx.fillStyle = "gray";
         ctx.fillText(f"FPS: {fps}", 5, 10)
+        
         self.watchdog = False
 
 
-raf_id = None
+##
 
+raf_id = None
 
 def run(canvas):
     screen = Game(canvas)
