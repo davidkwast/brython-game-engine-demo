@@ -1,11 +1,11 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "8f25e934fcf69330ae3381619953f323c7c33e48bd9bcdbae7c96800113372bf"
+            "sha256": "24a9a5112e9bcee1e8e49fb5a1edb498af447f51a0dc5f551760b5d389e7a654"
         },
         "pipfile-spec": 6,
         "requires": {
-            "python_version": "3.8"
+            "python_version": "3.9"
         },
         "sources": [
             {
@@ -18,11 +18,11 @@
     "default": {
         "pyglet": {
             "hashes": [
-                "sha256:ab00099bd8f6b3b09c623ff304a19ea381141dde587cfcce05b919b684c9234a",
-                "sha256:c99758089141be6d2c787902c9d0367b43f94976bbcd3853ea7e438b404c39cd"
+                "sha256:4401cc176580e4e17e2df8bbf7536f27e691327dc3f38f209a12f1859c70aed2",
+                "sha256:da9d8337388cedabf1f1c5dc21a45bb2b0e5327fba47f996c8573818c3dfa478"
             ],
             "index": "pypi",
-            "version": "==1.5.14"
+            "version": "==1.5.15"
         }
     },
     "develop": {}
